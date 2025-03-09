@@ -12,6 +12,7 @@ import java.awt.event.*;
 
 class YourGameName extends Game {
 	static int counter = 0;
+	Ball ball = new Ball(10,0,0)
 
   public YourGameName() {
     super("YourGameName!",800,600);
@@ -28,11 +29,15 @@ class YourGameName extends Game {
     	// each time the canvas is repainted
     	counter++;
     	brush.setColor(Color.white);
+	ball.paint();
+	ball.moveBall(1,1);
     	brush.drawString("Counter is " + counter,10,10);
   }
   
 	public static void main (String[] args) {
    		YourGameName a = new YourGameName();
+
+		
 		a.repaint();
   }
 }

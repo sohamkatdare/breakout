@@ -38,6 +38,17 @@ class Polygon {
       p.y -= origin.y;
     }
   }
+
+	public Polygon(int points, int radius, Point inPosition, double inRotation) {
+		shape = new Point[points];
+		double degrees = 360 / points;
+		for (int i = 0; i < points; i++) {
+			shape[i] = new Point(radius * Math.cos(Math.toRadians(degrees * i)), 
+					radius * Math.sin(Math.toRadians(degrees * i)));
+		}
+		position = inPosition;
+		rotation = inRotation;
+  }
   
   // "getPoints" applies the rotation and offset to the shape of the polygon.
   public Point[] getPoints() {
