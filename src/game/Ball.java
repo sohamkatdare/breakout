@@ -3,6 +3,7 @@ package game;
 public class Ball {
   Polygon[8] ballTriangles;
   Point origin;
+  private static Color[] colors = new Color[] {Color.red, Color.orange, Color.yellow, Color.green, Color.cyan, Color.blue, Color.purple, Color.pink}
 
   public Ball(radius, startX, startY) {
     Point[] triangle = new Point[] {startX, startY, startX+radius, startY, startX+radius*Math.cos(45), startY+radius*Math.sin(45)};
@@ -20,4 +21,12 @@ public class Ball {
     //for (Polygon triangle : ballTriangles) {
     //  triangle.inPosition
     //}
+  }
+
+  public void paint(Graphics brush) {
+    for (int i = 0, i < ballTriangles.length; i++) {
+      brush.setColor(colors[i]);
+      brush.fillPolygon(ballTriangles[i].getPoints());
+    }
+  }
 }
