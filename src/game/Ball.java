@@ -1,32 +1,29 @@
 package game;
 
-public class Ball {
-  Polygon[8] ballTriangles;
-  Point origin;
-  private static Color[] colors = new Color[] {Color.red, Color.orange, Color.yellow, Color.green, Color.cyan, Color.blue, Color.purple, Color.pink}
+import java.awt.*;
 
-  public Ball(radius, startX, startY) {
-    Point[] triangle = new Point[] {startX, startY, startX+radius, startY, startX+radius*Math.cos(45), startY+radius*Math.sin(45)};
-    origin = new Point(startX, startY);
-    for (int i = 0; i < ballTriangles.length; i++) {
-      ballTriangles[i] = new Polygon(triangle, origin, i*45);
-    }
-  }
+public class Ball extends Polygon {
 
-  public void moveBall(xDist, yDist) {
-    origin.setX = origin.getX + xDist;
-    origin.setY = origin.getY + yDist;
+	public Ball(int radius, int startX, int startY) {
+		super(8, radius, new Point(startX, startY), 0);
+		new BallCollision(radius, startX, startY);
+	}
 
-    // commented out as it may not be necessary, we will determine if that's true while testing
-    //for (Polygon triangle : ballTriangles) {
-    //  triangle.inPosition
-    //}
-  }
+	public void moveBall(int xDist, int yDist) {
+		position.setX(position.getX() + xDist);
+		position.setY(position.getY() + yDist);
+	}
 
-  public void paint(Graphics brush) {
-    for (int i = 0, i < ballTriangles.length; i++) {
-      brush.setColor(colors[i]);
-      brush.fillPolygon(ballTriangles[i].getPoints());
-    }
-  }
-}
+	public void paint(Graphics brush) {
+		Point[] points = super.getPoints();
+		
+		int[] xVals = new int[8];
+		int[] yVals = new int[8];
+		
+		for (int i = 0; i < 8; i++) {
+			xVals[i] = (int)Math.round(points[i].getX());
+			yVals[i] = (int)Math.round(points[i].getY());
+		}
+
+		brush.fillPolygon(xVals, yVals, 8);
+	}
