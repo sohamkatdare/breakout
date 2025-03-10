@@ -3,7 +3,7 @@ package game;
 import java.awt.*;
 import java.awt.event.*;
 
-class BreakoutGame extends Game {
+class BreakoutGame extends Game implements KeyListener {
 
     private Ball ball;
     private BlockManager blockManager;
@@ -18,6 +18,8 @@ class BreakoutGame extends Game {
     
     public BreakoutGame() {
         super("Breakout Game", 800, 600);
+        this.setFocusable(true);
+ 	    this.requestFocus();
         
         ball = new Ball(10, 400, 500);
         paddle = new Paddle(100, 10, 350, 550, 5);
@@ -25,6 +27,7 @@ class BreakoutGame extends Game {
         blockManager = new BlockManager();
         Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE};
         blockManager.createBlockGrid(5, 10, 60, 20, 100, 50, 10, colors);
+        this.addKeyListener(this);
     }
     
     public void paint(Graphics brush) {
@@ -134,4 +137,7 @@ class BreakoutGame extends Game {
         BreakoutGame game = new BreakoutGame();
         game.repaint();
     }
+
+    public void keyTyped(KeyEvent e) {		
+	}
 }
