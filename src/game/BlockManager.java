@@ -9,6 +9,7 @@ public class BlockManager {
     public class Block extends Polygon {
         private boolean visible;
         private Color color;
+        int height;
 
         public Block(int width, int height, int posX, int posY, Color blockColor) {
             super(new Point[] {
@@ -20,6 +21,7 @@ public class BlockManager {
             
             this.visible = true;
             this.color = blockColor;
+            this.height = height;
         }
 
         public boolean checkCollision(Ball ball) {
@@ -94,13 +96,21 @@ public class BlockManager {
         }
     }
     
-    public boolean checkCollisions(Ball ball) {
-        boolean collisionOccurred = false;
+    public int checkCollisions(Ball ball) {
+        int collisionOccurred = 0;
         
         for (Block block : blocks) {
             if (block.isVisible() && block.checkCollision(ball)) {
                 block.handleCollision();
-                collisionOccurred = true;
+                
+                if (ball.position.getY() + ball.getRadius() > block.position.getY() + block.height / 2 && 
+                		ball.position.getY() - ball.getRadius() < block.position.getY() - block.height / 2) {
+                	collisionOccurred = 1;
+                } else if (ball.position.getY() + ball.getRadius() > block.position.getY() + block.height / 2) {
+                	collisionOccurred = 2;
+                } else {
+                	collisionOccurred = 3;
+                }
             }
         }
         
