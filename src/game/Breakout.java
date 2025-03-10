@@ -85,8 +85,15 @@ class BreakoutGame extends Game implements KeyListener {
         }
         
         // Handle block collisions
-        if (blockManager.checkCollisions(ball)) {
-            ballSpeedY = -ballSpeedY;
+        int blockCollisions = blockManager.checkCollisions(ball);
+        if (blockCollisions == 1) {
+            ballSpeedX = -ballSpeedX;
+            score += 10;
+        } else if (blockCollisions == 2) {
+            ballSpeedY = Math.abs(ballSpeedY);
+            score += 10;
+        } else if (blockCollisions == 3){
+            ballSpeedY = -1 * Math.abs(ballSpeedY);
             score += 10;
         }
         
