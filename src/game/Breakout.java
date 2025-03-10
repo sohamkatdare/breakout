@@ -70,10 +70,11 @@ class BreakoutGame extends Game implements KeyListener {
         ball.moveBall(ballSpeedX, ballSpeedY);
         
         // Handle wall collisions
-        if (ball.position.getX() <= 0 || ball.position.getX() >= width) {
+        if (ball.position.getX() - ball.getRadius() <= 0 || 
+	    	ball.position.getX() + ball.getRadius() >= width) {
             ballSpeedX = -ballSpeedX;
         }
-        if (ball.position.getY() <= 0) {
+        if (ball.position.getY() - ball.getRadius() <= 0) {
             ballSpeedY = -ballSpeedY;
         }
         
