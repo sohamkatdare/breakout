@@ -6,7 +6,6 @@ public class Ball extends Polygon {
 
 	public Ball(int radius, int startX, int startY) {
 		super(8, radius, new Point(startX, startY), 0);
-		new BallCollision(radius, startX, startY);
 	}
 
 	public void moveBall(int xDist, int yDist) {
@@ -27,3 +26,4 @@ public class Ball extends Polygon {
 
 		brush.fillPolygon(xVals, yVals, 8);
 	}
+}
