@@ -8,6 +8,10 @@ public class Paddle extends Polygon {
     private boolean movingRight = false;
     private int width;
 
+    interface CollisionChecker { // functional interface
+        boolean checkCollision(Point point); 
+    }
+
     public Paddle(int width, int height, int posX, int posY, int speed) {
         super(new Point[] {
             new Point(0, 0),
@@ -50,15 +54,18 @@ public class Paddle extends Polygon {
             position.setX(Math.min(screenWidth - width, position.getX() + speed));
         }
     }
-    
-    public boolean checkCollision(Ball ball) {
+
+    public boolean checkCollisionHelper(Ball ball, CollisionChecker checker) {
         Point[] ballPoints = ball.getPoints();
         for (Point p : ballPoints) {
-            if (this.contains(p)) {
-                return true;
-            }
+            return checker.checkCollision(p);
         }
         return false;
+    }
+
+    public boolean checkCollision(Ball ball) {
+        CollisionChecker checker = (Point p) -> this.contains(p); // lambda expression + anonymous class
+        return checkCollisionHelper(ball, checker);
     }
     
     public int calculateBallAngle(Ball ball) {
