@@ -58,7 +58,10 @@ public class Paddle extends Polygon {
     public boolean checkCollisionHelper(Ball ball, CollisionChecker checker) {
         Point[] ballPoints = ball.getPoints();
         for (Point p : ballPoints) {
-            return checker.checkCollision(p);
+			boolean collides = checker.checkCollision(p);
+			if (collides) {
+				return true;
+			}
         }
         return false;
     }
