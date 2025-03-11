@@ -3,6 +3,7 @@ package game;
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 class BreakoutGame extends Game implements KeyListener {
 
     private Ball ball;
@@ -19,7 +20,7 @@ class BreakoutGame extends Game implements KeyListener {
     public BreakoutGame() {
         super("Breakout Game", 800, 600);
         this.setFocusable(true);
- 	    this.requestFocus();
+     	this.requestFocus();
         
         ball = new Ball(10, 400, 500);
         paddle = new Paddle(100, 10, 350, 550, 5);
@@ -37,7 +38,6 @@ class BreakoutGame extends Game implements KeyListener {
         blockManager.paint(brush);
         paddle.paint(brush);
         
-        brush.setColor(Color.WHITE);
         ball.paint(brush);
         
         brush.setColor(Color.WHITE);
@@ -68,10 +68,11 @@ class BreakoutGame extends Game implements KeyListener {
         paddle.update(width);
         
         ball.moveBall(ballSpeedX, ballSpeedY);
+        ball.rotateBall(1);
         
         // Handle wall collisions
         if (ball.position.getX() - ball.getRadius() <= 0 || 
-	    	ball.position.getX() + ball.getRadius() >= width) {
+        		ball.position.getX() + ball.getRadius() >= width) {
             ballSpeedX = -ballSpeedX;
         }
         if (ball.position.getY() - ball.getRadius() <= 0) {
@@ -108,6 +109,7 @@ class BreakoutGame extends Game implements KeyListener {
         ball = new Ball(10, 400, 500);
         ballSpeedX = 3;
         ballSpeedY = -3;
+        paddle.position = new Point(350, 550);
         gameStarted = false;
     }
     
@@ -146,6 +148,6 @@ class BreakoutGame extends Game implements KeyListener {
         game.repaint();
     }
 
-    public void keyTyped(KeyEvent e) {		
+	public void keyTyped(KeyEvent e) {		
 	}
 }
