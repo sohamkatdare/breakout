@@ -45,7 +45,9 @@ class BreakoutGame extends Game implements KeyListener {
         brush.drawString("Lives: " + lives, width - 80, 20);
         
         if (!gameStarted) {
-            brush.drawString("Press SPACE to start", 350, 300);
+        	if (lives > 0) {
+        		brush.drawString("Press SPACE to start", 350, 300);
+        	}
         } else {
             updateGame();
         }
