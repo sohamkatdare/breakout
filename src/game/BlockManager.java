@@ -76,14 +76,16 @@ public class BlockManager {
         blocks = new ArrayList<Block>();
     }
 
-    public Block createBlock(int width, int height, int posX, int posY, Color blockColor) {
+    public Block createBlock(int width, int height, int posX, int posY,
+    		Color blockColor) {
         Block block = new Block(width, height, posX, posY, blockColor);
         blocks.add(block);
         return block;
     }
     
-    public void createBlockGrid(int rows, int cols, int blockWidth, int blockHeight, 
-                               int startX, int startY, int padding, Color[] colors) {
+    public void createBlockGrid(int rows, int cols, int blockWidth, 
+    		int blockHeight, int startX, int startY, int padding, 
+    		Color[] colors) {
         for (int row = 0; row < rows; row++) {
             Color rowColor = colors[row % colors.length];
             
@@ -103,10 +105,13 @@ public class BlockManager {
             if (block.isVisible() && block.checkCollision(ball)) {
                 block.handleCollision();
                 
-                if (ball.position.getY() + ball.getRadius() > block.position.getY() + block.height / 2 && 
-                		ball.position.getY() - ball.getRadius() < block.position.getY() - block.height / 2) {
+                if (ball.position.getY() + ball.getRadius() > 
+                		block.position.getY() + block.height / 2 && 
+                		ball.position.getY() - ball.getRadius() < 
+                		block.position.getY() - block.height / 2) {
                 	collisionOccurred = 1;
-                } else if (ball.position.getY() + ball.getRadius() > block.position.getY() + block.height / 2) {
+                } else if (ball.position.getY() + ball.getRadius() > 
+                			block.position.getY() + block.height / 2) {
                 	collisionOccurred = 2;
                 } else {
                 	collisionOccurred = 3;
