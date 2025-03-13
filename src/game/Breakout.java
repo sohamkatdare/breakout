@@ -28,7 +28,7 @@ class BreakoutGame extends Game implements KeyListener {
         blockManager = new BlockManager();
         Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, 
         		Color.BLUE};
-        blockManager.createBlockGrid(5, 11, 60, 20, 35, 50, 10, colors);
+        blockManager.createBlockGrid(5, 11, 60, 20, 20, 50, 10, colors);
         this.addKeyListener(this);
     }
     
