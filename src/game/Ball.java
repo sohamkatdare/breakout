@@ -3,11 +3,9 @@ package game;
 import java.awt.*;
 
 public class Ball extends Polygon {
-	int radius;
-	Polygon triangleHolder;
-	StarPoint[] triangles = new StarPoint[6];
-	static Color[] colors = new Color[] {Color.red, Color.orange, Color.yellow, 
-			Color.green, Color.blue, Color.pink};
+	private int radius;
+	private Polygon triangleHolder;
+	private StarPoint[] triangles = new StarPoint[6];
 
 	public class StarPoint extends Polygon {
 		Color color;
@@ -24,6 +22,8 @@ public class Ball extends Polygon {
 		super(6, radius, new Point(startX, startY), 0);
 		this.radius = radius;
 		triangleHolder = new Polygon(6, radius * 2 / 3, new Point(startX, startY), 0);
+		Color[] colors = new Color[] {Color.red, Color.orange, Color.yellow, 
+				Color.green, Color.blue, Color.pink};
 
 		for (int i = 0; i < 6; i++) {
 			Point[] points = triangleHolder.getPoints();
