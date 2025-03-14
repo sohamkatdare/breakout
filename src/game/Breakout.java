@@ -3,6 +3,11 @@ package game;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * The main game class for the Breakout game.
+ * Handles game initialization, rendering, and game logic.
+ * Implements KeyListener to handle user input.
+ */
 @SuppressWarnings("serial")
 class BreakoutGame extends Game implements KeyListener {
 
@@ -17,6 +22,10 @@ class BreakoutGame extends Game implements KeyListener {
     private int ballSpeedX = 3;
     private int ballSpeedY = -3;
     
+    /**
+     * Creates a new Breakout game.
+     * Initializes the game components, including the ball, paddle, and blocks.
+     */
     public BreakoutGame() {
         super("Breakout Game", 800, 600);
         this.setFocusable(true);
@@ -32,6 +41,13 @@ class BreakoutGame extends Game implements KeyListener {
         this.addKeyListener(this);
     }
     
+    /**
+     * Renders the game on the screen.
+     * Draws the blocks, paddle, ball, and game status information.
+     * Handles GUI updates.
+     *
+     * @param brush The graphics context to paint on
+     */
     public void paint(Graphics brush) {
         brush.setColor(Color.BLACK);
         brush.fillRect(0, 0, width, height);
@@ -62,6 +78,10 @@ class BreakoutGame extends Game implements KeyListener {
         }
     }
     
+    /**
+     * Updates the game state.
+     * Handles ball movement, collisions, and game logic.
+     */
     private void updateGame() {
         if (lives <= 0 || blockManager.allBlocksDestroyed()) {
             return;
@@ -108,6 +128,10 @@ class BreakoutGame extends Game implements KeyListener {
         }
     }
     
+    /**
+     * Resets the ball to its initial position.
+     * Called when the player loses a life.
+     */
     private void resetBall() {
         ball = new Ball(10, 400, 500);
         ballSpeedX = 3;
@@ -116,6 +140,12 @@ class BreakoutGame extends Game implements KeyListener {
         gameStarted = false;
     }
     
+    /**
+     * Handles key press events.
+     * Controls paddle movement, game start, and game restart.
+     *
+     * @param e The key event
+     */
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         
@@ -136,6 +166,12 @@ class BreakoutGame extends Game implements KeyListener {
         }
     }
     
+    /**
+     * Handles key release events.
+     * Stops paddle movement when arrow keys are released.
+     *
+     * @param e The key event
+     */
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         
@@ -146,11 +182,23 @@ class BreakoutGame extends Game implements KeyListener {
         }
     }
     
+    /**
+     * The main entry point for the game.
+     * Creates and starts the game.
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         BreakoutGame game = new BreakoutGame();
         game.repaint();
     }
 
+    /**
+     * Handles key typed events.
+     * Required by the KeyListener interface but unused.
+     *
+     * @param e The key event
+     */
 	public void keyTyped(KeyEvent e) {		
 	}
 }
